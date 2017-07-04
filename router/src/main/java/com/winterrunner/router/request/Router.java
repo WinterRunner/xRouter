@@ -61,9 +61,7 @@ public class Router {
     }
 
 
-//register  unregister   post
-
-
+    //register  unregister   post
     private Action action;
 
     public <T extends Provider, E extends Action> void register(Class<T> providerClazz, Class<E> actionClazz) {
@@ -80,8 +78,10 @@ public class Router {
         action = null;
     }
 
-    public void post(){
-
+    public void post(RouterResponseBean routerResponseBean) {
+        if (action != null) {
+            action.post(routerResponseBean);
+        }
     }
 
 }

@@ -23,4 +23,9 @@ public abstract class Action {
         this.onResponseListener = onResponseListener;
         invoke(context, routerRequest, onResponseListener);
     }
+    public void post(RouterResponseBean routerResponseBean){
+        if(onResponseListener!=null){
+            onResponseListener.onSuccess(routerResponseBean);
+        }
+    }
 }
