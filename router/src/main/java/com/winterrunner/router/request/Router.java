@@ -5,7 +5,7 @@ import android.content.Context;
 import com.winterrunner.router.action.Action;
 import com.winterrunner.router.bean.RouterRequestBean;
 import com.winterrunner.router.bean.RouterResponseBean;
-import com.winterrunner.router.controller.ProviderManager;
+import com.winterrunner.router.controller.RouterManager;
 import com.winterrunner.router.interfaces.OnResponseListener;
 import com.winterrunner.router.provider.Provider;
 
@@ -36,7 +36,7 @@ public class Router {
     public RouterResponseBean request(Context context, RouterRequestBean routerRequestBean) {
         RouterResponseBean routerResponseBean = null;
         try {
-            routerResponseBean = ProviderManager.getInstance()
+            routerResponseBean = RouterManager.getInstance()
                     .getProvider(routerRequestBean.getProviderName())
                     .getAction(routerRequestBean.getActionName())
                     .invoke(context, routerRequestBean);
@@ -50,10 +50,10 @@ public class Router {
 
     public void request(Context context, RouterRequestBean routerRequestBean, OnResponseListener onResponseListener) {
         try {
-            ProviderManager.getInstance()
+            RouterManager.getInstance()
                     .getProvider(routerRequestBean.getProviderName())
                     .getAction(routerRequestBean.getActionName())
-                    .invoke(context, routerRequestBean, onResponseListener);
+                    .request(context, routerRequestBean, onResponseListener);
         } catch (Exception e) {
             e.printStackTrace();
             onResponseListener.onError();
@@ -66,7 +66,7 @@ public class Router {
 
     public <T extends Provider, E extends Action> void register(Class<T> providerClazz, Class<E> actionClazz) {
         try {
-            action = ProviderManager.getInstance()
+            action = RouterManager.getInstance()
                     .getProvider(providerClazz.getName())
                     .getAction(actionClazz.getName());
         } catch (Exception e) {

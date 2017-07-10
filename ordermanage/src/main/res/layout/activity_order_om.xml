@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:background="#0000ff"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_centerVertical="true"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:text="订单管理"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/iv_back_om"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_navigation"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
+
+    <Button
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="start1"
+        android:text="商品模块" />
+
+
+
+    <Button
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="start2"
+        android:text="首页" />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="startresult"
+        android:text="异步返回结果给首页" />
+
+    <TextView
+        android:id="@+id/tv_show_om"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#33ff0000"
+        android:gravity="center"
+        android:hint=""
+        android:textSize="20dp" />
+</LinearLayout>

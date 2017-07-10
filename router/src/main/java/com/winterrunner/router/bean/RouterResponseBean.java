@@ -37,6 +37,11 @@ public class RouterResponseBean{
         return from;
     }
 
+    public RouterResponseBean put(String key,Object value){
+        map_response.put(key,value);
+        return this;
+    }
+
     public String getStringValue(String key){
         try {
             return (String) map_response.get(key);

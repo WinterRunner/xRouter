@@ -11,21 +11,21 @@ import java.util.HashMap;
  * Created by L.K.X on 2017/5/12.
  */
 
-public class ProviderManager {
+public class RouterManager {
 
     private HashMap<String,Provider> map_providers = new HashMap<>();
 
 
-    private static ProviderManager instance;
+    private static RouterManager instance;
 
-    private ProviderManager(){}
+    private RouterManager(){}
 
 
-    public static ProviderManager getInstance(){
+    public static RouterManager getInstance(){
         if(instance==null){
-            synchronized (ProviderManager.class){
+            synchronized (RouterManager.class){
                 if(instance==null){
-                    instance = new ProviderManager();
+                    instance = new RouterManager();
                 }
             }
         }
