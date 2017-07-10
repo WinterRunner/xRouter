@@ -48,7 +48,6 @@ public class OpenOrderPageAction extends Action{
         context.startActivity(intent);
 
 
-
         //1.要是需要在这里处理数据，可能有耗时操作，开启线程异步操作等，等处理完毕，异步返回结果，如下
 //        if(onResponseListener!=null){
 //            try {
