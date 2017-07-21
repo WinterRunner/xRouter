@@ -1,8 +1,6 @@
 package com.winterrunner.router.provider;
 
 
-import android.util.Log;
-
 import com.winterrunner.router.action.Action;
 
 import java.util.HashMap;
@@ -13,30 +11,25 @@ import java.util.HashMap;
 
 public abstract class Provider {
 
-    public Provider(){
-        registerAction();
-    }
-
-
     private HashMap<String, Action> map_actions = new HashMap<>();
-
-
-    public void addAction(Action iAction) {
-        if (map_actions.get(iAction.getClass().getName()) == null) {
-            map_actions.put(iAction.getClass().getName(), iAction);
-        }
-    }
 
     public Action getAction(String actionName) {
         Action iAction = map_actions.get(actionName);
         if (iAction == null) {
-            Log.e("router","没有匹配到IAction");
-        } else {
-            //Log.e("router","匹配到IAction: "+actionName);
+           addAction(actionName);
         }
-        return iAction;
+        return map_actions.get(actionName);
     }
 
-    public abstract void registerAction();
-
+    private void addAction(String actionName){
+        try {
+            Class<?> aClass = Class.forName(actionName);
+            if(map_actions.get(actionName)==null){
+                map_actions.put(actionName, (Action) aClass.newInstance());
+            }
+        } catch (Exception e) {
+            //反射找不到action
+            e.printStackTrace();
+        }
+    }
 }

@@ -7,10 +7,9 @@
 
 
 使用方法：
+
     1.每个模块都依赖router(用于模块间交互)，basecommon(公共的工具类，BaseActivity,BaseFragment等)
-
     2.模块之间的跳转：这里只写了个主页跳转到订单模块的逻辑，跳转后的结果返回有两种，同步或者异步返回结果
-
                    同步返回结果：处理Action中的两个参数的invoke方法
                    异步返回结果：处理Action中的三个参数的invoke方法，使用方法看action中的说明
 

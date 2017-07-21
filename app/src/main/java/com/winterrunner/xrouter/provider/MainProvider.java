@@ -9,8 +9,5 @@ import com.winterrunner.router.provider.Provider;
  */
 
 public class MainProvider extends Provider{
-    @Override
-    public void registerAction() {
 
-    }
 }

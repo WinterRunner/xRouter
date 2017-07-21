@@ -56,7 +56,7 @@ public class RouterRequestBean{
         }
         return null;
     }
-    public <T> T  getObject(Class<T> clazz,String key){
+    public <T> T  getObjectValue(Class<T> clazz,String key){
         try {
             return (T) map_request.get(key);
         }catch (Exception e){

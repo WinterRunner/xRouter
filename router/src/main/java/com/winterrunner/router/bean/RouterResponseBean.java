@@ -48,9 +48,8 @@ public class RouterResponseBean{
         }catch (Exception e){
             e.printStackTrace();
         }
-        return null;
-    }
-    public <T> T  getObject(Class<T> clazz,String key){
+        return null;}
+    public <T> T  getObjectValue(Class<T> clazz,String key){
         try {
             return (T) map_response.get(key);
         }catch (Exception e){

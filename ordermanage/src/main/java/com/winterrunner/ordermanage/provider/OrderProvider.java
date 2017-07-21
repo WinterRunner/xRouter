@@ -1,6 +1,5 @@
 package com.winterrunner.ordermanage.provider;
 
-import com.winterrunner.ordermanage.action.OpenOrderPageAction;
 import com.winterrunner.router.provider.Provider;
 
 /**
@@ -10,8 +9,4 @@ import com.winterrunner.router.provider.Provider;
  */
 
 public class OrderProvider extends Provider{
-    @Override
-    public void registerAction() {
-        addAction(new OpenOrderPageAction());
-    }
 }
