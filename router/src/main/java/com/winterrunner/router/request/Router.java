@@ -60,27 +60,14 @@ public class Router {
         }
     }
 
-
-    //register  unregister   post
-    private Action action;
-
-    public <T extends Provider, E extends Action> void register(Class<T> providerClazz, Class<E> actionClazz) {
+    public <T extends Provider, E extends Action>  void post(Class<T> providerClazz, Class<E> actionClazz, RouterResponseBean routerResponseBean) {
         try {
-            action = RouterManager.getInstance()
+            Action action = RouterManager.getInstance()
                     .getProvider(providerClazz.getName())
                     .getAction(actionClazz.getName());
+            action.post(routerResponseBean);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    public <T extends Action> void unregister(Class<T> actionClazz) {
-        action = null;
-    }
-
-    public void post(RouterResponseBean routerResponseBean) {
-        if (action != null) {
-            action.post(routerResponseBean);
         }
     }
 
