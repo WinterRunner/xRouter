@@ -1,20 +1,59 @@
 package com.winterrunner.router.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.HashMap;
 
 /**
  * Created by L.K.X on 2017/5/15.
  */
 
-public class RouterRequestBean{
+public class RouterRequestBean implements Parcelable{
 
     private String from;
     private String actionName;
     private String providerName;
-
-
-
     private HashMap<String,Object> map_request = new HashMap<>();
+
+    public RouterRequestBean(){}
+
+    protected RouterRequestBean(Parcel in) {
+        from = in.readString();
+        actionName = in.readString();
+        providerName = in.readString();
+        map_request = in.readHashMap(HashMap.class.getClassLoader());
+    }
+
+    public static final Creator<RouterRequestBean> CREATOR = new Creator<RouterRequestBean>() {
+        @Override
+        public RouterRequestBean createFromParcel(Parcel in) {
+            return new RouterRequestBean(in);
+        }
+
+        @Override
+        public RouterRequestBean[] newArray(int size) {
+            return new RouterRequestBean[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(from);
+        dest.writeString(actionName);
+        dest.writeString(providerName);
+        dest.writeMap(map_request);
+    }
+
+
+
+
+    ///////////////
 
     public RouterRequestBean provider(String providerName) {
         this.providerName = providerName;
@@ -31,7 +70,7 @@ public class RouterRequestBean{
         return this;
     }
 
-    public RouterRequestBean put(String key,Object value){
+    public RouterRequestBean put(String key, Object value){
         map_request.put(key,value);
         return this;
     }

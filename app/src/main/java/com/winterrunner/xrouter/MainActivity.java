@@ -42,10 +42,12 @@ public class MainActivity extends BaseActivity {
                 .action("com.winterrunner.ordermanage.action.OpenOrderPageAction")
                 .from("main")
                 .put("content", "我是首页跳转而来，异步开启的，可以异步返回结果给主页"), new OnResponseListener() {
+
             @Override
-            public void onSuccess(RouterResponseBean routerResponseBean) {
+            public boolean onSuccess(RouterResponseBean routerResponseBean) {
                 //异步返回结果
                 Toast.makeText(MainActivity.this, "主页收到异步返回的结果："+routerResponseBean.getStringValue("result"), Toast.LENGTH_SHORT).show();
+                return true;
             }
 
             @Override

@@ -31,8 +31,8 @@ public abstract class Action {
     }
     public void post(RouterResponseBean routerResponseBean){
         for (int i = 0; i < list_response_listener.size(); i++) {
-            boolean ifContinue = list_response_listener.get(i).onSuccess(routerResponseBean);
-            if (!ifContinue) {
+            boolean isFinish = list_response_listener.get(i).onSuccess(routerResponseBean);
+            if (isFinish) {
                 list_delete.add(list_response_listener.get(i));
             }
         }

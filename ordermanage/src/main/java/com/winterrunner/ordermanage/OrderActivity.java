@@ -23,10 +23,6 @@ public class OrderActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_om);
 
-        //异步返回结果，首先要注册Router
-        Router.getDefault().register(OrderProvider.class, OpenOrderPageAction.class);
-
-
         initView();
     }
 
@@ -53,14 +49,12 @@ public class OrderActivity extends BaseActivity {
     public void startresult(View view) {
         RouterResponseBean responseBean = new RouterResponseBean().status(RouterResponseBean.SUCCESS)
                 .put("result", "666666666666666");
-        Router.getDefault().post(responseBean);
+        Router.getDefault().post(OrderProvider.class, OpenOrderPageAction.class,responseBean);
     }
 
 
     @Override
     protected void onDestroy() {
-        //异步返回结果，页面关闭的时候释放router
-        Router.getDefault().unregister(OpenOrderPageAction.class);
         super.onDestroy();
     }
 }
