@@ -35,6 +35,14 @@ public class OrderActivity extends BaseActivity {
         });
         TextView tv_show = (TextView) findViewById(R.id.tv_show_om);
         tv_show.setText(getIntent().getStringExtra("content"));
+
+
+        if(getIntent().getBooleanExtra("isAsynchronous",false)){
+            findViewById(R.id.button).setVisibility(View.VISIBLE);
+        }else {
+            findViewById(R.id.button).setVisibility(View.GONE);
+        }
+
     }
 
     public void start1(View view) {

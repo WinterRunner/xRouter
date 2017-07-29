@@ -27,10 +27,6 @@ public class OpenOrderPageAction extends Action{
         context.startActivity(intent);
 
 
-
-
-
-
         //return null;//如果不需要返回值，直接返回null即可
         RouterResponseBean routerResponseBean = new RouterResponseBean()
                                                 .status(RouterResponseBean.SUCCESS)
@@ -45,6 +41,7 @@ public class OpenOrderPageAction extends Action{
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
         intent.putExtra("content",routerRequest.getStringValue("content"));
+        intent.putExtra("isAsynchronous",true);//是异步
         context.startActivity(intent);
 
 
