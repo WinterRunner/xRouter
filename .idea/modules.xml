@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/basecommon/basecommon.iml" filepath="$PROJECT_DIR$/basecommon/basecommon.iml" />
-      <module fileurl="file://$PROJECT_DIR$/goodmanage/goodmanage.iml" filepath="$PROJECT_DIR$/goodmanage/goodmanage.iml" />
       <module fileurl="file://$PROJECT_DIR$/ordermanage/ordermanage.iml" filepath="$PROJECT_DIR$/ordermanage/ordermanage.iml" />
       <module fileurl="file://$PROJECT_DIR$/router/router.iml" filepath="$PROJECT_DIR$/router/router.iml" />
       <module fileurl="file://$PROJECT_DIR$/xRouter.iml" filepath="$PROJECT_DIR$/xRouter.iml" />

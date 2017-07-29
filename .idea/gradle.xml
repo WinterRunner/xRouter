@@ -10,7 +10,6 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/basecommon" />
-            <option value="$PROJECT_DIR$/goodmanage" />
             <option value="$PROJECT_DIR$/ordermanage" />
             <option value="$PROJECT_DIR$/router" />
           </set>

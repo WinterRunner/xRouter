@@ -1,1 +1,1 @@
-include ':app', ':router', ':ordermanage', ':goodmanage', ':basecommon'
+include ':app', ':router', ':ordermanage', ':basecommon'
