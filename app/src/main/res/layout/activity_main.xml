@@ -24,14 +24,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="start11"
-        android:text="异步开启订单模块" />
+        android:text="异步开启订单模块,并使用方式一释放" />
 
     <Button
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="start2"
-        android:text="商品模块" />
+        android:onClick="start22"
+        android:text="异步开启订单模块,并使用方式二释放" />
 
 
     <TextView

@@ -48,19 +48,21 @@ public class Router {
         return routerResponseBean;
     }
 
-    public void request(Context context, RouterRequestBean routerRequestBean, OnResponseListener onResponseListener) {
+    public Action request(Context context, RouterRequestBean routerRequestBean, OnResponseListener onResponseListener) {
+        Action action = null;
         try {
-            RouterManager.getInstance()
+            action = RouterManager.getInstance()
                     .getProvider(routerRequestBean.getProviderName())
-                    .getAction(routerRequestBean.getActionName())
-                    .request(context, routerRequestBean, onResponseListener);
+                    .getAction(routerRequestBean.getActionName());
+            action.request(context, routerRequestBean, onResponseListener);
         } catch (Exception e) {
             e.printStackTrace();
             onResponseListener.onError();
         }
+        return action;
     }
 
-    public <T extends Provider, E extends Action>  void post(Class<T> providerClazz, Class<E> actionClazz, RouterResponseBean routerResponseBean) {
+    public <T extends Provider, E extends Action> void post(Class<T> providerClazz, Class<E> actionClazz, RouterResponseBean routerResponseBean) {
         try {
             Action action = RouterManager.getInstance()
                     .getProvider(providerClazz.getName())

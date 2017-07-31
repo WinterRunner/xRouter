@@ -1,6 +1,7 @@
 package com.winterrunner.router.interfaces;
 
 
+import com.winterrunner.router.action.Action;
 import com.winterrunner.router.bean.RouterResponseBean;
 
 /**
@@ -10,9 +11,9 @@ import com.winterrunner.router.bean.RouterResponseBean;
 public interface OnResponseListener{
 
     /**
+     * @param action 当不需要再接收回调的时候，需要调用aciton.release(...)来释放回调
      * @param routerResponseBean
-     * @return 返回boolean值,若是需要继续接收回调,是否完成回调.完成回调，则删除回调引用
      */
-    boolean onSuccess(RouterResponseBean routerResponseBean);
+    void onSuccess(Action action, RouterResponseBean routerResponseBean);
     void onError();
 }

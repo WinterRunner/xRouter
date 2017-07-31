@@ -17,7 +17,6 @@ import java.util.List;
 
 public abstract class Action {
     private List<OnResponseListener> list_response_listener = new ArrayList<>();
-    private List<OnResponseListener> list_delete = new ArrayList<>();
 
     public abstract RouterResponseBean invoke(Context context, RouterRequestBean routerRequest);
 
@@ -31,12 +30,10 @@ public abstract class Action {
     }
     public void post(RouterResponseBean routerResponseBean){
         for (int i = 0; i < list_response_listener.size(); i++) {
-            boolean isFinish = list_response_listener.get(i).onSuccess(routerResponseBean);
-            if (isFinish) {
-                list_delete.add(list_response_listener.get(i));
-            }
+            list_response_listener.get(i).onSuccess(this,routerResponseBean);
         }
-        list_response_listener.removeAll(list_delete);
-        list_delete.clear();
+    }
+    public void release(OnResponseListener onResponseListener){
+        list_response_listener.remove(onResponseListener);
     }
 }
