@@ -29,5 +29,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':ordermanage')
     compile project(':basecommon')
-    compile project(':router')
+    compile project(':router')//依赖library引入
+//    compile 'com.winterrunner.router:router:1.0.0'//远程库方式引入
 }
