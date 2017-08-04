@@ -23,17 +23,20 @@ public abstract class Action {
     public abstract void invoke(Context context, RouterRequestBean routerRequest, OnResponseListener onResponseListener);
 
     public void request(Context context, RouterRequestBean routerRequest, OnResponseListener onResponseListener) {
-        if(!list_response_listener.contains(onResponseListener)){
+        if (!list_response_listener.contains(onResponseListener)) {
             list_response_listener.add(onResponseListener);
         }
         invoke(context, routerRequest, onResponseListener);
     }
-    public void post(RouterResponseBean routerResponseBean){
-        for (int i = 0; i < list_response_listener.size(); i++) {
-            list_response_listener.get(i).onSuccess(this,routerResponseBean);
+
+    public synchronized void post(RouterResponseBean routerResponseBean) {
+        for (int i = list_response_listener.size() - 1; i >= 0; i--) {
+            list_response_listener.get(i).onSuccess(this, routerResponseBean);
         }
     }
-    public void release(OnResponseListener onResponseListener){
-        list_response_listener.remove(onResponseListener);
+
+    public synchronized void release(OnResponseListener onResponseListener) {
+        if (onResponseListener != null)
+            list_response_listener.remove(onResponseListener);
     }
 }

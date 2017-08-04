@@ -73,4 +73,12 @@ public class Router {
         }
     }
 
+
+    public void releaseAll() {
+        RouterManager.getInstance().releaseAll();
+    }
+
+    public void release(String providerName, String actionName) {
+        RouterManager.getInstance().release(providerName,actionName);
+    }
 }

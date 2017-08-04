@@ -23,3 +23,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+
+-keep  class com.winterrunner.router.bean.**{*;}
+-keep  class * extends com.winterrunner.router.action.Action{*; }
+-keep  class * extends com.winterrunner.router.provider.Provider{*; }
