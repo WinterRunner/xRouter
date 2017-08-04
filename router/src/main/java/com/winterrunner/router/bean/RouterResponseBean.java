@@ -18,21 +18,21 @@ public class RouterResponseBean implements Parcelable {
     private String from;
 
 
-    private HashMap<String, Object> map_response = new HashMap<>();
+    private HashMap<String, Object> responseParams = new HashMap<>();
 
     public RouterResponseBean(){}
 
     protected RouterResponseBean(Parcel in) {
         status = in.readInt();
         from = in.readString();
-        map_response = in.readHashMap(HashMap.class.getClassLoader());
+        responseParams = in.readHashMap(HashMap.class.getClassLoader());
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(status);
         dest.writeString(from);
-        dest.writeMap(map_response);
+        dest.writeMap(responseParams);
     }
 
     @Override
@@ -74,13 +74,13 @@ public class RouterResponseBean implements Parcelable {
     }
 
     public RouterResponseBean put(String key, Object value) {
-        map_response.put(key, value);
+        responseParams.put(key, value);
         return this;
     }
 
     public String getStringValue(String key) {
         try {
-            return (String) map_response.get(key);
+            return (String) responseParams.get(key);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,7 +89,7 @@ public class RouterResponseBean implements Parcelable {
 
     public <T> T getObjectValue(Class<T> clazz, String key) {
         try {
-            return (T) map_response.get(key);
+            return (T) responseParams.get(key);
         } catch (Exception e) {
             e.printStackTrace();
         }

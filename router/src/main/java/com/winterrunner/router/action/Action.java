@@ -16,27 +16,27 @@ import java.util.List;
  */
 
 public abstract class Action {
-    private List<OnResponseListener> list_response_listener = new ArrayList<>();
+    private List<OnResponseListener> responseListeners = new ArrayList<>();
 
     public abstract RouterResponseBean invoke(Context context, RouterRequestBean routerRequest);
 
     public abstract void invoke(Context context, RouterRequestBean routerRequest, OnResponseListener onResponseListener);
 
     public void request(Context context, RouterRequestBean routerRequest, OnResponseListener onResponseListener) {
-        if (!list_response_listener.contains(onResponseListener)) {
-            list_response_listener.add(onResponseListener);
+        if (!responseListeners.contains(onResponseListener)) {
+            responseListeners.add(onResponseListener);
         }
         invoke(context, routerRequest, onResponseListener);
     }
 
     public synchronized void post(RouterResponseBean routerResponseBean) {
-        for (int i = list_response_listener.size() - 1; i >= 0; i--) {
-            list_response_listener.get(i).onSuccess(this, routerResponseBean);
+        for (int i = responseListeners.size() - 1; i >= 0; i--) {
+            responseListeners.get(i).onSuccess(this, routerResponseBean);
         }
     }
 
     public synchronized void release(OnResponseListener onResponseListener) {
         if (onResponseListener != null)
-            list_response_listener.remove(onResponseListener);
+            responseListeners.remove(onResponseListener);
     }
 }

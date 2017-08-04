@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class RouterManager {
 
-    private HashMap<String, Provider> map_providers = new HashMap<>();
+    private HashMap<String, Provider> providers = new HashMap<>();
 
 
     private static RouterManager instance;
@@ -34,18 +34,18 @@ public class RouterManager {
     }
 
     public Provider getProvider(String providerName) {
-        Provider iProvider = map_providers.get(providerName);
+        Provider iProvider = providers.get(providerName);
         if (iProvider == null) {
             registerProvider(providerName);
         }
-        return map_providers.get(providerName);
+        return providers.get(providerName);
     }
 
     private synchronized void registerProvider(String providerName) {
         try {
             Class<?> aClass = Class.forName(providerName);
-            if (map_providers.get(providerName) == null) {
-                map_providers.put(providerName, (Provider) aClass.newInstance());
+            if (providers.get(providerName) == null) {
+                providers.put(providerName, (Provider) aClass.newInstance());
             }
         } catch (Exception e) {
             //不存在指定的provider
@@ -55,18 +55,18 @@ public class RouterManager {
 
 
     public synchronized void releaseAll() {
-        Iterator iterator = map_providers.entrySet().iterator();
+        Iterator iterator = providers.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry entry = (Map.Entry) iterator.next();
             //Object key = entry.getKey();
             ((Provider) entry.getValue()).releaseAll();
         }
-        map_providers.clear();
+        providers.clear();
     }
 
     public synchronized void release(String providerName, String actionName) {
         if(providerName!=null){
-            Iterator iterator = map_providers.entrySet().iterator();
+            Iterator iterator = providers.entrySet().iterator();
             while (iterator.hasNext()) {
                 Map.Entry entry = (Map.Entry) iterator.next();
                 //Object key = entry.getKey();
@@ -76,8 +76,8 @@ public class RouterManager {
                     break;
                 }
             }
-            if(map_providers.containsKey(providerName)){
-                map_providers.remove(providerName);
+            if(providers.containsKey(providerName)){
+                providers.remove(providerName);
             }
         }
 

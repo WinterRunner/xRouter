@@ -14,7 +14,7 @@ public class RouterRequestBean implements Parcelable{
     private String from;
     private String actionName;
     private String providerName;
-    private HashMap<String,Object> map_request = new HashMap<>();
+    private HashMap<String,Object> requestParams = new HashMap<>();
 
     public RouterRequestBean(){}
 
@@ -22,7 +22,7 @@ public class RouterRequestBean implements Parcelable{
         from = in.readString();
         actionName = in.readString();
         providerName = in.readString();
-        map_request = in.readHashMap(HashMap.class.getClassLoader());
+        requestParams = in.readHashMap(HashMap.class.getClassLoader());
     }
 
     public static final Creator<RouterRequestBean> CREATOR = new Creator<RouterRequestBean>() {
@@ -47,7 +47,7 @@ public class RouterRequestBean implements Parcelable{
         dest.writeString(from);
         dest.writeString(actionName);
         dest.writeString(providerName);
-        dest.writeMap(map_request);
+        dest.writeMap(requestParams);
     }
 
 
@@ -71,7 +71,7 @@ public class RouterRequestBean implements Parcelable{
     }
 
     public RouterRequestBean put(String key, Object value){
-        map_request.put(key,value);
+        requestParams.put(key,value);
         return this;
     }
 
@@ -89,7 +89,7 @@ public class RouterRequestBean implements Parcelable{
 
     public String getStringValue(String key){
         try {
-            return (String) map_request.get(key);
+            return (String) requestParams.get(key);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -97,7 +97,7 @@ public class RouterRequestBean implements Parcelable{
     }
     public <T> T  getObjectValue(Class<T> clazz,String key){
         try {
-            return (T) map_request.get(key);
+            return (T) requestParams.get(key);
         }catch (Exception e){
             e.printStackTrace();
         }

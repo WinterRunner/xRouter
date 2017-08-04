@@ -11,21 +11,21 @@ import java.util.HashMap;
 
 public abstract class Provider {
 
-    private HashMap<String, Action> map_actions = new HashMap<>();
+    private HashMap<String, Action> actions = new HashMap<>();
 
     public Action getAction(String actionName) {
-        Action iAction = map_actions.get(actionName);
+        Action iAction = actions.get(actionName);
         if (iAction == null) {
             addAction(actionName);
         }
-        return map_actions.get(actionName);
+        return actions.get(actionName);
     }
 
     private void addAction(String actionName) {
         try {
             Class<?> aClass = Class.forName(actionName);
-            if (map_actions.get(actionName) == null) {
-                map_actions.put(actionName, (Action) aClass.newInstance());
+            if (actions.get(actionName) == null) {
+                actions.put(actionName, (Action) aClass.newInstance());
             }
         } catch (Exception e) {
             //反射找不到action
@@ -34,12 +34,12 @@ public abstract class Provider {
     }
 
     public void releaseAll() {
-        map_actions.clear();
+        actions.clear();
     }
 
     public void release(String actionName) {
-        if (actionName != null && map_actions.containsKey(actionName)) {
-            map_actions.remove(actionName);
+        if (actionName != null && actions.containsKey(actionName)) {
+            actions.remove(actionName);
         }
     }
 }
