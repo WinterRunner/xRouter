@@ -2,12 +2,14 @@
 
 ## 一.引入:
    1. 依赖远程库
-      >compile 'com.winterrunner.router:router:1.0.0'
+      >compile 'com.winterrunner.router:router:1.0.1'
    2. 下载router源码，依赖library
 
    3. 混淆添加
-            -keep  class com.winterrunner.router.bean.**{*;}
-            -keep  class * extends com.winterrunner.router.action.Action{*; }
+
+    >-keep  class com.winterrunner.router.bean.**{*;}
+
+    >-keep  class * extends com.winterrunner.router.action.Action{*; }
 
 
 ## 二.目的：模块化开发，解耦
@@ -26,4 +28,5 @@
 ## 四.注意：
     1. 模块化开发，主要目的是为了解耦。
     2. 当项目功能越来越多的时候，这时候我们运行一次项目可能需要耗费好几分钟。开发阶段，我们可以单独运行自己的module，来达到快速运行开发（具体配置方式，请自行百度喽，以后会在demo中慢慢集成进来的）
+
 
