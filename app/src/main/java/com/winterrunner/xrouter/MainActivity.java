@@ -24,7 +24,6 @@ public class MainActivity extends BaseActivity {
     public void start1(View view) {
         //同步返回结果
         RouterResponseBean responseBean = Router.getDefault().request(this, new RouterRequestBean()
-                .provider("com.winterrunner.ordermanage.provider.OrderProvider")
                 .action("com.winterrunner.ordermanage.action.OpenOrderPageAction")
                 .from("main")
                 .put("content", "我是首页跳转而来,同步开启的"));
@@ -37,7 +36,6 @@ public class MainActivity extends BaseActivity {
     public void start11(View view) {
 
         Router.getDefault().request(this, new RouterRequestBean()
-                .provider("com.winterrunner.ordermanage.provider.OrderProvider")
                 .action("com.winterrunner.ordermanage.action.OpenOrderPageAction")
                 .from("main")
                 .put("content", "我是首页跳转而来，异步开启的，可以异步返回结果给主页"), new OnResponseListener() {
@@ -64,7 +62,6 @@ public class MainActivity extends BaseActivity {
     //22异步回调，拿到action,在需要的地方进行释放
     public void start22(View view) {
         action222 = Router.getDefault().request(this, new RouterRequestBean()
-                .provider("com.winterrunner.ordermanage.provider.OrderProvider")
                 .action("com.winterrunner.ordermanage.action.OpenOrderPageAction")
                 .from("main")
                 .put("content", "我是首页跳转而来，异步开启的，可以异步返回结果给主页"),onResponseListener222);

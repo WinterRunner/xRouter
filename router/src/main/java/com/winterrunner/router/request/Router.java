@@ -5,9 +5,9 @@ import android.content.Context;
 import com.winterrunner.router.action.Action;
 import com.winterrunner.router.bean.RouterRequestBean;
 import com.winterrunner.router.bean.RouterResponseBean;
-import com.winterrunner.router.controller.RouterManager;
+import com.winterrunner.router.controller.ActionManager;
 import com.winterrunner.router.interfaces.OnResponseListener;
-import com.winterrunner.router.provider.Provider;
+import com.winterrunner.router.utils.Log;
 
 
 /**
@@ -15,6 +15,7 @@ import com.winterrunner.router.provider.Provider;
  */
 
 public class Router {
+
 
     private static Router instance;
 
@@ -36,12 +37,12 @@ public class Router {
     public RouterResponseBean request(Context context, RouterRequestBean routerRequestBean) {
         RouterResponseBean routerResponseBean = null;
         try {
-            routerResponseBean = RouterManager.getInstance()
-                    .getProvider(routerRequestBean.getProviderName())
+            routerResponseBean = ActionManager.getInstance()
                     .getAction(routerRequestBean.getActionName())
                     .invoke(context, routerRequestBean);
         } catch (Exception e) {
             e.printStackTrace();
+            Log.e("请求发生异常："+e.toString());
             routerResponseBean = new RouterResponseBean();
             routerResponseBean.status(RouterResponseBean.ERROR);
         }
@@ -51,34 +52,47 @@ public class Router {
     public Action request(Context context, RouterRequestBean routerRequestBean, OnResponseListener onResponseListener) {
         Action action = null;
         try {
-            action = RouterManager.getInstance()
-                    .getProvider(routerRequestBean.getProviderName())
-                    .getAction(routerRequestBean.getActionName());
-            action.request(context, routerRequestBean, onResponseListener);
+            action = ActionManager.getInstance()
+                    .getAction(routerRequestBean.getActionName())
+                    .request(context, routerRequestBean, onResponseListener);
         } catch (Exception e) {
             e.printStackTrace();
+            Log.e("请求发生异常："+e.toString());
             onResponseListener.onError();
         }
         return action;
     }
 
-    public <T extends Provider, E extends Action> void post(Class<T> providerClazz, Class<E> actionClazz, RouterResponseBean routerResponseBean) {
+    public <T extends Action> void post(Class<T> actionClazz, RouterResponseBean routerResponseBean) {
         try {
-            Action action = RouterManager.getInstance()
-                    .getProvider(providerClazz.getName())
-                    .getAction(actionClazz.getName());
-            action.post(routerResponseBean);
+            ActionManager.getInstance()
+                    .getAction(actionClazz.getName())
+                    .post(routerResponseBean);
+            Log.e("成功发出异步回调");
         } catch (Exception e) {
             e.printStackTrace();
+            Log.e("异步回调发生异常："+e.toString());
         }
     }
 
 
     public void releaseAll() {
-        RouterManager.getInstance().releaseAll();
+        ActionManager.getInstance().releaseAll();
     }
 
-    public void release(String providerName, String actionName) {
-        RouterManager.getInstance().release(providerName,actionName);
+    public void release(String actionName) {
+        ActionManager.getInstance().release(actionName);
     }
+
+
+    public boolean isDebug() {
+        return isDebug;
+    }
+
+    public void setDebug(boolean debug) {
+        isDebug = debug;
+    }
+
+    private boolean isDebug = false;
+
 }

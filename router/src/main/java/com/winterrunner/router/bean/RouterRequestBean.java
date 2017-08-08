@@ -13,7 +13,6 @@ public class RouterRequestBean implements Parcelable{
 
     private String from;
     private String actionName;
-    private String providerName;
     private HashMap<String,Object> requestParams = new HashMap<>();
 
     public RouterRequestBean(){}
@@ -21,7 +20,6 @@ public class RouterRequestBean implements Parcelable{
     protected RouterRequestBean(Parcel in) {
         from = in.readString();
         actionName = in.readString();
-        providerName = in.readString();
         requestParams = in.readHashMap(HashMap.class.getClassLoader());
     }
 
@@ -46,7 +44,6 @@ public class RouterRequestBean implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(from);
         dest.writeString(actionName);
-        dest.writeString(providerName);
         dest.writeMap(requestParams);
     }
 
@@ -54,11 +51,6 @@ public class RouterRequestBean implements Parcelable{
 
 
     ///////////////
-
-    public RouterRequestBean provider(String providerName) {
-        this.providerName = providerName;
-        return this;
-    }
 
     public RouterRequestBean action(String actionName) {
         this.actionName = actionName;
@@ -83,9 +75,6 @@ public class RouterRequestBean implements Parcelable{
         return actionName;
     }
 
-    public String getProviderName() {
-        return providerName;
-    }
 
     public String getStringValue(String key){
         try {

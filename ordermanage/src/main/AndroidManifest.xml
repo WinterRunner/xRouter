@@ -2,9 +2,13 @@
 
     package="com.winterrunner.ordermanage">
 
-    <application android:allowBackup="true" android:label="@string/app_name"
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
         android:supportsRtl="true">
-        <activity android:name=".OrderActivity"/>
+        <activity
+            android:name=".OrderActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -28,4 +28,3 @@
 
 -keep  class com.winterrunner.router.bean.**{*;}
 -keep  class * extends com.winterrunner.router.action.Action{*; }
--keep  class * extends com.winterrunner.router.provider.Provider{*; }

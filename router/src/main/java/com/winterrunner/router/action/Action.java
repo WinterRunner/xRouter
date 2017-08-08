@@ -7,7 +7,6 @@ import com.winterrunner.router.bean.RouterResponseBean;
 import com.winterrunner.router.interfaces.OnResponseListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * author: L.K.X
@@ -16,17 +15,18 @@ import java.util.List;
  */
 
 public abstract class Action {
-    private List<OnResponseListener> responseListeners = new ArrayList<>();
+    private ArrayList<OnResponseListener> responseListeners = new ArrayList<>();
 
     public abstract RouterResponseBean invoke(Context context, RouterRequestBean routerRequest);
 
     public abstract void invoke(Context context, RouterRequestBean routerRequest, OnResponseListener onResponseListener);
 
-    public void request(Context context, RouterRequestBean routerRequest, OnResponseListener onResponseListener) {
+    public Action request(Context context, RouterRequestBean routerRequest, OnResponseListener onResponseListener) {
         if (!responseListeners.contains(onResponseListener)) {
             responseListeners.add(onResponseListener);
         }
         invoke(context, routerRequest, onResponseListener);
+        return this;
     }
 
     public synchronized void post(RouterResponseBean routerResponseBean) {
@@ -36,7 +36,7 @@ public abstract class Action {
     }
 
     public synchronized void release(OnResponseListener onResponseListener) {
-        if (onResponseListener != null)
+        if (onResponseListener != null && responseListeners.contains(onResponseListener))
             responseListeners.remove(onResponseListener);
     }
 }

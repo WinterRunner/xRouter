@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.winterrunner.basecommon.base.BaseActivity;
 import com.winterrunner.ordermanage.action.OpenOrderPageAction;
-import com.winterrunner.ordermanage.provider.OrderProvider;
 import com.winterrunner.router.bean.RouterResponseBean;
 import com.winterrunner.router.request.Router;
 
@@ -57,7 +56,7 @@ public class OrderActivity extends BaseActivity {
     public void startresult(View view) {
         RouterResponseBean responseBean = new RouterResponseBean().status(RouterResponseBean.SUCCESS)
                 .put("result", "666666666666666");
-        Router.getDefault().post(OrderProvider.class, OpenOrderPageAction.class,responseBean);
+        Router.getDefault().post(OpenOrderPageAction.class,responseBean);
     }
 
 
