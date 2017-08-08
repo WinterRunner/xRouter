@@ -7,9 +7,9 @@
 
    3. 混淆添加
 
-    >-keep  class com.winterrunner.router.bean.**{*;}
+    -keep  class com.winterrunner.router.bean.**{*;}
 
-    >-keep  class * extends com.winterrunner.router.action.Action{*; }
+    -keep  class * extends com.winterrunner.router.action.Action{*; }
 
 
 ## 二.目的：模块化开发，解耦
