@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.winterrunner.router.bean.RouterRequestBean;
 import com.winterrunner.router.bean.RouterResponseBean;
+import com.winterrunner.router.controller.ActionManager;
 import com.winterrunner.router.interfaces.OnResponseListener;
 
 import java.util.ArrayList;
@@ -35,8 +36,12 @@ public abstract class Action {
         }
     }
 
-    public synchronized void release(OnResponseListener onResponseListener) {
+    public synchronized void releaseListener(OnResponseListener onResponseListener) {
         if (onResponseListener != null && responseListeners.contains(onResponseListener))
             responseListeners.remove(onResponseListener);
+    }
+
+    public synchronized void releaseSelf() {
+        ActionManager.getInstance().release(getClass().getName());
     }
 }

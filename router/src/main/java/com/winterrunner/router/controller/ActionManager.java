@@ -57,7 +57,7 @@ public class ActionManager {
     public void release(String actionName) {
         if (actionName != null && actions.containsKey(actionName)) {
             actions.remove(actionName);
+            Log.i("释放指定action成功:"+actionName);
         }
-        Log.i("释放指定action成功:"+actionName);
     }
 }

@@ -2,7 +2,7 @@
 
 ## 一.引入:
    1. 依赖远程库
-      >compile 'com.winterrunner.router:router:1.0.1'
+      >compile 'com.winterrunner.router:router:1.0.2'
    2. 下载router源码，依赖library
 
    3. 混淆添加

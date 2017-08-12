@@ -35,17 +35,18 @@ public class MainActivity extends BaseActivity {
     //11异步回调，匿名内部类内部直接释放资源
     public void start11(View view) {
 
-        Router.getDefault().request(this, new RouterRequestBean()
+         Router.getDefault().request(this, new RouterRequestBean()
                 .action("com.winterrunner.ordermanage.action.OpenOrderPageAction")
                 .from("main")
                 .put("content", "我是首页跳转而来，异步开启的，可以异步返回结果给主页"), new OnResponseListener() {
 
             @Override
-            public void onSuccess(Action action,RouterResponseBean routerResponseBean) {
+            public void onSuccess(Action action, RouterResponseBean routerResponseBean) {
                 //异步返回结果
-                Toast.makeText(MainActivity.this, "主页收到异步返回的结果："+routerResponseBean.getStringValue("result"), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "主页收到异步返回的结果：" + routerResponseBean.getStringValue("result"), Toast.LENGTH_SHORT).show();
 
-                action.release(this);//在不需要再接收回调的时候，需要手动释放
+                action.releaseListener(this);//在不需要再接收回调的时候，需要手动释放
+                action.releaseSelf();
             }
 
             @Override
@@ -53,7 +54,6 @@ public class MainActivity extends BaseActivity {
 
             }
         });
-
 
 
     }
@@ -70,7 +70,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         if(action222!=null){
-            action222.release(onResponseListener222);
+            action222.releaseListener(onResponseListener222);
+            action222.releaseSelf();
         }
         super.onDestroy();
     }
@@ -81,7 +82,7 @@ public class MainActivity extends BaseActivity {
             //异步返回结果
             Toast.makeText(MainActivity.this, "主页收到异步返回的结果："+routerResponseBean.getStringValue("result"), Toast.LENGTH_SHORT).show();
 
-            action.release(this);//在不需要再接收回调的时候，需要手动释放
+            action.releaseListener(this);//在不需要再接收回调的时候，需要手动释放
         }
 
         @Override
